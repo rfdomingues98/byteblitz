@@ -9,7 +9,6 @@ const config = {
   /** Enables hot reloading for local packages without a build step */
   transpilePackages: [
     "@byteblitz/api",
-    "@byteblitz/auth",
     "@byteblitz/db",
     "@byteblitz/ui",
     "@byteblitz/validators",
