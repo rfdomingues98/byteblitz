@@ -125,7 +125,7 @@ export const protectedProcedure = t.procedure
     if (!ctx.auth.userId) {
       throw new TRPCError({
         code: "UNAUTHORIZED",
-        message: "You must be logged in to access this resource"
+        message: "You must be logged in to access this resource",
       });
     }
     return next({
