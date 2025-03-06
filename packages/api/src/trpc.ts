@@ -28,10 +28,13 @@ import { db } from "@byteblitz/db/client";
 export const createTRPCContext = async (opts: { headers: Headers }) => {
   const authToken = opts.headers.get("Authorization") ?? null;
   const clerkAuth = await auth();
-  console.dir({ clerkAuth }, { depth: null });
 
   const source = opts.headers.get("x-trpc-source") ?? "unknown";
-  console.log(">>> tRPC Request from", source, "by", clerkAuth.userId);
+  if (process.env.NODE_ENV !== "production") {
+    console.log(">>> tRPC Request from", source, "by", clerkAuth.userId);
+  } else {
+    console.log(">>> tRPC Request from", source);
+  }
 
   return {
     auth: clerkAuth,
@@ -104,7 +107,7 @@ const timingMiddleware = t.middleware(async ({ next, path }) => {
  *
  * This is the base piece you use to build new queries and mutations on your
  * tRPC API. It does not guarantee that a user querying is authorized, but you
- * can still access user session data if they are logged in
+ * can still access user auth data if they are logged in
  */
 export const publicProcedure = t.procedure.use(timingMiddleware);
 
@@ -112,7 +115,7 @@ export const publicProcedure = t.procedure.use(timingMiddleware);
  * Protected (authenticated) procedure
  *
  * If you want a query or mutation to ONLY be accessible to logged in users, use this. It verifies
- * the session is valid and guarantees `ctx.session.user` is not null.
+ * the user is authenticated.
  *
  * @see https://trpc.io/docs/procedures
  */
@@ -120,7 +123,10 @@ export const protectedProcedure = t.procedure
   .use(timingMiddleware)
   .use(({ ctx, next }) => {
     if (!ctx.auth.userId) {
-      throw new TRPCError({ code: "UNAUTHORIZED" });
+      throw new TRPCError({
+        code: "UNAUTHORIZED",
+        message: "You must be logged in to access this resource"
+      });
     }
     return next({
       ctx: {
