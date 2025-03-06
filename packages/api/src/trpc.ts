@@ -6,12 +6,12 @@
  * tl;dr - this is where all the tRPC server stuff is created and plugged in.
  * The pieces you will need to use are documented accordingly near the end
  */
+import { auth } from "@clerk/nextjs/server";
 import { initTRPC, TRPCError } from "@trpc/server";
 import superjson from "superjson";
 import { ZodError } from "zod";
 
 import { db } from "@byteblitz/db/client";
-import { auth } from "@clerk/nextjs/server";
 
 /**
  * 1. CONTEXT
@@ -25,12 +25,10 @@ import { auth } from "@clerk/nextjs/server";
  *
  * @see https://trpc.io/docs/server/context
  */
-export const createTRPCContext = async (opts: {
-  headers: Headers;
-}) => {
+export const createTRPCContext = async (opts: { headers: Headers }) => {
   const authToken = opts.headers.get("Authorization") ?? null;
   const clerkAuth = await auth();
-  console.dir({ clerkAuth }, { depth: null })
+  console.dir({ clerkAuth }, { depth: null });
 
   const source = opts.headers.get("x-trpc-source") ?? "unknown";
   console.log(">>> tRPC Request from", source, "by", clerkAuth.userId);
@@ -126,7 +124,7 @@ export const protectedProcedure = t.procedure
     }
     return next({
       ctx: {
-        auth: ctx.auth
+        auth: ctx.auth,
       },
     });
   });

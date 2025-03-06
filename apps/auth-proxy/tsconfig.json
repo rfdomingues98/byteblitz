@@ -1,4 +1,0 @@
-{
-  "extends": "@byteblitz/tsconfig/base.json",
-  "include": ["routes"]
-}
