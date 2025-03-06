@@ -1,5 +1,9 @@
 {
-  "extends": "@acme/tsconfig/base.json",
-  "include": ["."],
-  "exclude": ["node_modules"]
+  "extends": "@byteblitz/tsconfig/base.json",
+  "include": [
+    "."
+  ],
+  "exclude": [
+    "node_modules"
+  ]
 }

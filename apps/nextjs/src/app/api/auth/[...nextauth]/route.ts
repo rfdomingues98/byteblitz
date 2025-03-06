@@ -1,7 +1,7 @@
 import { cookies } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
 
-import { handlers, isSecureContext } from "@acme/auth";
+import { handlers, isSecureContext } from "@byteblitz/auth";
 
 const EXPO_COOKIE_NAME = "__acme-expo-redirect-state";
 const AUTH_COOKIE_PATTERN = /authjs\.session-token=([^;]+)/;
@@ -38,7 +38,7 @@ async function handleExpoSigninCallback(req: NextRequest, redirectURL: string) {
   if (!match)
     throw new Error(
       "Unable to find session cookie: " +
-        JSON.stringify(authResponse.headers.getSetCookie()),
+      JSON.stringify(authResponse.headers.getSetCookie()),
     );
 
   const url = new URL(redirectURL);

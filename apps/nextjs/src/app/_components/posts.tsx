@@ -1,25 +1,25 @@
 "use client";
 
 import {
-  useMutation,
-  useQueryClient,
-  useSuspenseQuery,
+    useMutation,
+    useQueryClient,
+    useSuspenseQuery,
 } from "@tanstack/react-query";
 
-import type { RouterOutputs } from "@acme/api";
-import { CreatePostSchema } from "@acme/db/schema";
-import { cn } from "@acme/ui";
-import { Button } from "@acme/ui/button";
+import type { RouterOutputs } from "@byteblitz/api";
+import { CreatePostSchema } from "@byteblitz/db/schema";
+import { cn } from "@byteblitz/ui";
+import { Button } from "@byteblitz/ui/button";
 import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormMessage,
-  useForm,
-} from "@acme/ui/form";
-import { Input } from "@acme/ui/input";
-import { toast } from "@acme/ui/toast";
+    Form,
+    FormControl,
+    FormField,
+    FormItem,
+    FormMessage,
+    useForm,
+} from "@byteblitz/ui/form";
+import { Input } from "@byteblitz/ui/input";
+import { toast } from "@byteblitz/ui/toast";
 
 import { useTRPC } from "~/trpc/react";
 
