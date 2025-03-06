@@ -1,10 +1,10 @@
-import { skipCSRFCheck } from "@auth/core";
-import { DrizzleAdapter } from "@auth/drizzle-adapter";
 import type {
   DefaultSession,
   NextAuthConfig,
   Session as NextAuthSession,
 } from "next-auth";
+import { skipCSRFCheck } from "@auth/core";
+import { DrizzleAdapter } from "@auth/drizzle-adapter";
 import Discord from "next-auth/providers/discord";
 
 import { db } from "@byteblitz/db/client";
@@ -33,9 +33,9 @@ export const authConfig = {
   // In development, we need to skip checks to allow Expo to work
   ...(!isSecureContext
     ? {
-      skipCSRFCheck: skipCSRFCheck,
-      trustHost: true,
-    }
+        skipCSRFCheck: skipCSRFCheck,
+        trustHost: true,
+      }
     : {}),
   secret: env.AUTH_SECRET,
   providers: [Discord],
@@ -62,11 +62,11 @@ export const validateToken = async (
   const session = await adapter.getSessionAndUser?.(sessionToken);
   return session
     ? {
-      user: {
-        ...session.user,
-      },
-      expires: session.session.expires.toISOString(),
-    }
+        user: {
+          ...session.user,
+        },
+        expires: session.session.expires.toISOString(),
+      }
     : null;
 };
 
