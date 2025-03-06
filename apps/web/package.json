@@ -15,10 +15,10 @@
   },
   "dependencies": {
     "@byteblitz/api": "workspace:*",
-    "@byteblitz/auth": "workspace:*",
     "@byteblitz/db": "workspace:*",
     "@byteblitz/ui": "workspace:*",
     "@byteblitz/validators": "workspace:*",
+    "@clerk/nextjs": "^6.12.4",
     "@t3-oss/env-nextjs": "^0.12.0",
     "@tanstack/react-query": "catalog:",
     "@trpc/client": "catalog:",
