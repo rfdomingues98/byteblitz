@@ -1,0 +1,126 @@
+enum difficulty {
+  easy
+  medium
+  hard
+}
+
+enum submission_status {
+  pending
+  running
+  accepted
+  wrong_answer
+  time_limit_exceeded
+  memory_limit_exceeded
+  runtime_error
+  compilation_error
+}
+
+table language {
+  id uuid [pk, not null, default: `gen_random_uuid()`]
+  name text [not null, unique]
+  slug text [not null, unique]
+  version text [not null]
+  displayName text [not null]
+  displayOrder integer [not null, default: 0]
+  isEnabled boolean [not null, default: true]
+  createdAt timestamp [not null, default: `now()`]
+  updatedAt "timestamp with time zone"
+}
+
+table problem_code_template {
+  id uuid [pk, not null, default: `gen_random_uuid()`]
+  problemId uuid [not null]
+  languageId uuid [not null]
+  initialCode text [not null]
+  createdAt timestamp [not null, default: `now()`]
+  updatedAt "timestamp with time zone"
+}
+
+table problem_tag {
+  id uuid [pk, not null, default: `gen_random_uuid()`]
+  problemId uuid [not null]
+  tagId uuid [not null]
+}
+
+table problem {
+  id uuid [pk, not null, default: `gen_random_uuid()`]
+  title text [not null, unique]
+  slug text [not null, unique]
+  description text [not null]
+  difficulty difficulty [default: 'easy']
+  defaultExecutionTimeLimit integer [not null, default: 10000]
+  defaultMemoryLimit integer [not null, default: 5]
+  submissionsCount integer [not null, default: 0]
+  successfulSubmissionsCount integer [not null, default: 0]
+  isPublished boolean [not null, default: false]
+  isArchived boolean [not null, default: false]
+  createdAt timestamp [not null, default: `now()`]
+  updatedAt "timestamp with time zone"
+}
+
+table submission {
+  id uuid [pk, not null, default: `gen_random_uuid()`]
+  problemId uuid [not null]
+  userId uuid [not null]
+  languageId uuid [not null]
+  code text [not null]
+  status submission_status [default: 'pending']
+  executionTime integer
+  memoryUsed integer
+  testResults jsonb
+  errorMessage text
+  createdAt timestamp [not null, default: `now()`]
+  updatedAt "timestamp with time zone"
+}
+
+table tag {
+  id uuid [pk, not null, default: `gen_random_uuid()`]
+  name text [not null, unique]
+  description text
+  createdAt timestamp [not null, default: `now()`]
+  updatedAt "timestamp with time zone"
+}
+
+table test_case {
+  id uuid [pk, not null, default: `gen_random_uuid()`]
+  problemId uuid [not null]
+  input text [not null]
+  expectedOutput text [not null]
+  explanation text
+  executionTimeLimit integer
+  memoryLimit integer
+  isPublic boolean [not null, default: false]
+  isSample boolean [not null, default: false]
+  orderIndex integer [not null, default: 0]
+  createdAt timestamp [not null, default: `now()`]
+  updatedAt "timestamp with time zone"
+}
+
+table user {
+  id uuid [pk, not null, default: `gen_random_uuid()`]
+  clerkId text [not null]
+  username text [not null, unique]
+  fullName varchar(255)
+  bio text
+  avatarUrl text
+  email varchar(255) [not null, unique]
+  emailVerified "timestamp with time zone"
+  createdAt timestamp [not null, default: `now()`]
+  updatedAt "timestamp with time zone"
+}
+
+ref problem_code_template_problemId_problem_id_fk: problem_code_template.problemId > problem.id [delete: cascade, update: no action]
+
+ref problem_code_template_languageId_language_id_fk: problem_code_template.languageId > language.id [delete: cascade, update: no action]
+
+ref problem_tag_problemId_problem_id_fk: problem_tag.problemId > problem.id [delete: cascade, update: no action]
+
+ref problem_tag_tagId_tag_id_fk: problem_tag.tagId > tag.id [delete: cascade, update: no action]
+
+ref submission_problemId_problem_id_fk: submission.problemId > problem.id [delete: cascade, update: no action]
+
+ref submission_userId_user_id_fk: submission.userId > user.id [delete: cascade, update: no action]
+
+ref submission_languageId_language_id_fk: submission.languageId > language.id [delete: cascade, update: no action]
+
+ref test_case_problemId_problem_id_fk: test_case.problemId > problem.id [delete: cascade, update: no action]

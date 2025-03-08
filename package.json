@@ -12,6 +12,8 @@
     "clean:workspaces": "turbo run clean",
     "db:push": "turbo -F @byteblitz/db push",
     "db:studio": "turbo -F @byteblitz/db studio",
+    "db:diagram": "turbo -F @byteblitz/db diagram",
+    "db:seed": "turbo -F @byteblitz/db seed",
     "dev": "turbo watch dev --continue",
     "dev:web": "turbo watch dev -F @byteblitz/web...",
     "format": "turbo run format --continue -- --cache --cache-location .cache/.prettiercache",
