@@ -1,5 +1,5 @@
 import { sql } from "drizzle-orm";
-import { pgEnum, pgTable } from "drizzle-orm/pg-core";
+import { index, pgEnum, pgTable } from "drizzle-orm/pg-core";
 
 import { languages } from "./languages";
 import { problems } from "./problems";
@@ -61,4 +61,7 @@ export const submissions = pgTable("submission", (t) => ({
   updatedAt: t
     .timestamp({ mode: "date", withTimezone: true })
     .$onUpdateFn(() => sql`now()`),
+}), (t) => ({
+  userProblemIdx: index("idx_user_problem").on(t.userId, t.problemId),
+  statusIdx: index("idx_submission_status").on(t.status),
 }));

@@ -1,5 +1,5 @@
 import { sql } from "drizzle-orm";
-import { pgTable } from "drizzle-orm/pg-core";
+import { index, pgTable } from "drizzle-orm/pg-core";
 
 import { problems } from "./problems";
 
@@ -31,4 +31,6 @@ export const testCases = pgTable("test_case", (t) => ({
   updatedAt: t
     .timestamp({ mode: "date", withTimezone: true })
     .$onUpdateFn(() => sql`now()`),
+}), (t) => ({
+  problemIdIdx: index("idx_test_case_problem_id").on(t.problemId),
 }));

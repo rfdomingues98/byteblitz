@@ -1,5 +1,5 @@
 import { sql } from "drizzle-orm";
-import { pgEnum, pgTable } from "drizzle-orm/pg-core";
+import { index, pgEnum, pgTable, uniqueIndex } from "drizzle-orm/pg-core";
 
 import { tags } from "./tags";
 
@@ -27,6 +27,8 @@ export const problems = pgTable("problem", (t) => ({
   updatedAt: t
     .timestamp({ mode: "date", withTimezone: true })
     .$onUpdateFn(() => sql`now()`),
+}), (t) => ({
+  publishedDifficultyIdx: index("idx_published_difficulty").on(t.isPublished, t.difficulty),
 }));
 
 // Many-to-many relationship with tags
@@ -40,4 +42,6 @@ export const problemTags = pgTable("problem_tag", (t) => ({
     .uuid()
     .references(() => tags.id, { onDelete: "cascade" })
     .notNull(),
+}), (t) => ({
+  uniqueProblemTag: uniqueIndex("unique_problem_tag").on(t.problemId, t.tagId),
 }));

@@ -3,7 +3,7 @@ import { pgTable } from "drizzle-orm/pg-core";
 
 export const users = pgTable("user", (t) => ({
   id: t.uuid().notNull().primaryKey().defaultRandom(),
-  clerkId: t.text().notNull(),
+  clerkId: t.text().notNull().unique(),
   username: t.text().notNull().unique(),
   fullName: t.varchar({ length: 255 }),
   bio: t.text(),
