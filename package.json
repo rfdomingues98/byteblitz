@@ -27,7 +27,7 @@
     "@byteblitz/prettier-config": "workspace:*",
     "@turbo/gen": "^2.3.4",
     "prettier": "catalog:",
-    "turbo": "^2.3.4",
+    "turbo": "^2.4.4",
     "typescript": "catalog:"
   },
   "prettier": "@byteblitz/prettier-config"
