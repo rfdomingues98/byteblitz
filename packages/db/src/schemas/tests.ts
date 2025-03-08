@@ -1,10 +1,14 @@
 import { sql } from "drizzle-orm";
 import { pgTable } from "drizzle-orm/pg-core";
+
 import { problems } from "./problems";
 
 export const testCases = pgTable("test_case", (t) => ({
   id: t.uuid().primaryKey().defaultRandom(),
-  problemId: t.uuid().references(() => problems.id, { onDelete: "cascade" }).notNull(),
+  problemId: t
+    .uuid()
+    .references(() => problems.id, { onDelete: "cascade" })
+    .notNull(),
 
   // Test case content
   input: t.text().notNull(),
@@ -27,4 +31,4 @@ export const testCases = pgTable("test_case", (t) => ({
   updatedAt: t
     .timestamp({ mode: "date", withTimezone: true })
     .$onUpdateFn(() => sql`now()`),
-})); 
+}));

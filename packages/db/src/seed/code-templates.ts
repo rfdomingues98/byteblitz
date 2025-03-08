@@ -1,9 +1,13 @@
-import type { Db } from "../client";
+import type { Transaction } from "../client";
 import { problemCodeTemplates } from "../schemas/code-templates";
 
 // Function to generate code templates for a problem in multiple languages
-export const codeTemplatesSeedData = (problemId: string, problemSlug: string, languagesMap: Map<string, string>): typeof problemCodeTemplates.$inferInsert[] => {
-  const templates: typeof problemCodeTemplates.$inferInsert[] = [];
+export const codeTemplatesSeedData = (
+  problemId: string,
+  problemSlug: string,
+  languagesMap: Map<string, string>,
+): (typeof problemCodeTemplates.$inferInsert)[] => {
+  const templates: (typeof problemCodeTemplates.$inferInsert)[] = [];
 
   if (problemSlug === "two-sum") {
     // JavaScript solution
@@ -12,8 +16,7 @@ export const codeTemplatesSeedData = (problemId: string, problemSlug: string, la
       templates.push({
         problemId,
         languageId: jsLangId,
-        initialCode:
-          `/**
+        initialCode: `/**
  * @param {number[]} nums
  * @param {number} target
  * @return {number[]}
@@ -30,8 +33,7 @@ function twoSum(nums, target) {
       templates.push({
         problemId,
         languageId: pyLangId,
-        initialCode:
-          `from typing import List
+        initialCode: `from typing import List
 
 def two_sum(nums: List[int], target: int) -> List[int]:
     # Your code here
@@ -45,8 +47,7 @@ def two_sum(nums: List[int], target: int) -> List[int]:
       templates.push({
         problemId,
         languageId: javaLangId,
-        initialCode:
-          `import java.util.HashMap;
+        initialCode: `import java.util.HashMap;
 import java.util.Map;
 
 class Solution {
@@ -65,8 +66,7 @@ class Solution {
       templates.push({
         problemId,
         languageId: jsLangId,
-        initialCode:
-          `/**
+        initialCode: `/**
  * @param {string} s
  * @return {boolean}
  */
@@ -82,8 +82,7 @@ function isValid(s) {
       templates.push({
         problemId,
         languageId: pyLangId,
-        initialCode:
-          `def is_valid(s: str) -> bool:
+        initialCode: `def is_valid(s: str) -> bool:
     # Your code here
     pass`,
       });
@@ -97,8 +96,7 @@ function isValid(s) {
       templates.push({
         problemId,
         languageId: jsLangId,
-        initialCode:
-          `/**
+        initialCode: `/**
  * @param {number[][]} matrix
  * @return {void} Do not return anything, modify matrix in-place instead.
  */
@@ -114,8 +112,7 @@ function rotate(matrix) {
       templates.push({
         problemId,
         languageId: pyLangId,
-        initialCode:
-          `from typing import List
+        initialCode: `from typing import List
 
 def rotate(matrix: List[List[int]]) -> None:
     """
@@ -132,8 +129,7 @@ def rotate(matrix: List[List[int]]) -> None:
       templates.push({
         problemId,
         languageId: javaLangId,
-        initialCode:
-          `class Solution {
+        initialCode: `class Solution {
     public void rotate(int[][] matrix) {
         // Your code here
     }
@@ -149,8 +145,7 @@ def rotate(matrix: List[List[int]]) -> None:
       templates.push({
         problemId,
         languageId: jsLangId,
-        initialCode:
-          `/**
+        initialCode: `/**
  * Definition for singly-linked list.
  * function ListNode(val, next) {
  *     this.val = (val===undefined ? 0 : val)
@@ -173,8 +168,7 @@ function isPalindrome(head) {
       templates.push({
         problemId,
         languageId: pyLangId,
-        initialCode:
-          `# Definition for singly-linked list.
+        initialCode: `# Definition for singly-linked list.
 # class ListNode:
 #     def __init__(self, val=0, next=None):
 #         self.val = val
@@ -192,8 +186,7 @@ def is_palindrome(head: ListNode) -> bool:
       templates.push({
         problemId,
         languageId: javaLangId,
-        initialCode:
-          `/**
+        initialCode: `/**
  * Definition for singly-linked list.
  * public class ListNode {
  *     int val;
@@ -219,8 +212,7 @@ class Solution {
       templates.push({
         problemId,
         languageId: jsLangId,
-        initialCode:
-          `/**
+        initialCode: `/**
  * @param {number} capacity
  */
 class LRUCache {
@@ -261,8 +253,7 @@ class LRUCache {
       templates.push({
         problemId,
         languageId: pyLangId,
-        initialCode:
-          `class LRUCache:
+        initialCode: `class LRUCache:
     def __init__(self, capacity: int):
         # Initialize your data structure here
         pass
@@ -288,8 +279,7 @@ class LRUCache {
       templates.push({
         problemId,
         languageId: javaLangId,
-        initialCode:
-          `class LRUCache {
+        initialCode: `class LRUCache {
     
     public LRUCache(int capacity) {
         // Initialize your data structure here
@@ -321,8 +311,7 @@ class LRUCache {
       templates.push({
         problemId,
         languageId: jsLangId,
-        initialCode:
-          `/**
+        initialCode: `/**
  * @param {number} numCourses
  * @param {number[][]} prerequisites
  * @return {boolean}
@@ -339,8 +328,7 @@ function canFinish(numCourses, prerequisites) {
       templates.push({
         problemId,
         languageId: pyLangId,
-        initialCode:
-          `from typing import List
+        initialCode: `from typing import List
 
 def can_finish(num_courses: int, prerequisites: List[List[int]]) -> bool:
     # Your code here
@@ -354,8 +342,7 @@ def can_finish(num_courses: int, prerequisites: List[List[int]]) -> bool:
       templates.push({
         problemId,
         languageId: javaLangId,
-        initialCode:
-          `class Solution {
+        initialCode: `class Solution {
     public boolean canFinish(int numCourses, int[][] prerequisites) {
         // Your code here
     }
@@ -371,8 +358,7 @@ def can_finish(num_courses: int, prerequisites: List[List[int]]) -> bool:
       templates.push({
         problemId,
         languageId: jsLangId,
-        initialCode:
-          `/**
+        initialCode: `/**
  * @param {string} s
  * @param {string[]} wordDict
  * @return {boolean}
@@ -389,8 +375,7 @@ function wordBreak(s, wordDict) {
       templates.push({
         problemId,
         languageId: pyLangId,
-        initialCode:
-          `from typing import List
+        initialCode: `from typing import List
 
 def word_break(s: str, word_dict: List[str]) -> bool:
     # Your code here
@@ -404,8 +389,7 @@ def word_break(s: str, word_dict: List[str]) -> bool:
       templates.push({
         problemId,
         languageId: javaLangId,
-        initialCode:
-          `import java.util.List;
+        initialCode: `import java.util.List;
 
 class Solution {
     public boolean wordBreak(String s, List<String> wordDict) {
@@ -423,8 +407,7 @@ class Solution {
       templates.push({
         problemId,
         languageId: jsLangId,
-        initialCode:
-          `/**
+        initialCode: `/**
  * @param {number[]} nums1
  * @param {number[]} nums2
  * @return {number}
@@ -441,8 +424,7 @@ function findMedianSortedArrays(nums1, nums2) {
       templates.push({
         problemId,
         languageId: pyLangId,
-        initialCode:
-          `from typing import List
+        initialCode: `from typing import List
 
 def find_median_sorted_arrays(nums1: List[int], nums2: List[int]) -> float:
     # Your code here
@@ -456,8 +438,7 @@ def find_median_sorted_arrays(nums1: List[int], nums2: List[int]) -> float:
       templates.push({
         problemId,
         languageId: javaLangId,
-        initialCode:
-          `class Solution {
+        initialCode: `class Solution {
     public double findMedianSortedArrays(int[] nums1, int[] nums2) {
         // Your code here
     }
@@ -470,9 +451,9 @@ def find_median_sorted_arrays(nums1: List[int], nums2: List[int]) -> float:
 };
 
 export const insertCodeTemplatesSeed = async (
-  db: Db,
+  db: Transaction,
   problemsMap: Map<string, string>,
-  languagesMap: Map<string, string>
+  languagesMap: Map<string, string>,
 ) => {
   console.log("🌱 Seeding code templates...");
 
@@ -485,16 +466,23 @@ export const insertCodeTemplatesSeed = async (
     "lru-cache",
     "course-schedule",
     "word-break",
-    "median-of-two-sorted-arrays"
+    "median-of-two-sorted-arrays",
   ];
 
   for (const problemSlug of problemsWithTemplates) {
     const problemId = problemsMap.get(problemSlug);
     if (!problemId) continue;
 
-    const templates = codeTemplatesSeedData(problemId, problemSlug, languagesMap);
+    const templates = codeTemplatesSeedData(
+      problemId,
+      problemSlug,
+      languagesMap,
+    );
     if (templates.length > 0) {
-      await db.insert(problemCodeTemplates).values(templates).onConflictDoNothing();
+      await db
+        .insert(problemCodeTemplates)
+        .values(templates)
+        .onConflictDoNothing();
     }
   }
-}; 
+};

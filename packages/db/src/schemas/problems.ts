@@ -1,5 +1,6 @@
 import { sql } from "drizzle-orm";
 import { pgEnum, pgTable } from "drizzle-orm/pg-core";
+
 import { tags } from "./tags";
 
 export const difficultyEnum = pgEnum("difficulty", ["easy", "medium", "hard"]);
@@ -31,6 +32,12 @@ export const problems = pgTable("problem", (t) => ({
 // Many-to-many relationship with tags
 export const problemTags = pgTable("problem_tag", (t) => ({
   id: t.uuid().primaryKey().defaultRandom(),
-  problemId: t.uuid().references(() => problems.id, { onDelete: "cascade" }).notNull(),
-  tagId: t.uuid().references(() => tags.id, { onDelete: "cascade" }).notNull(),
-})); 
+  problemId: t
+    .uuid()
+    .references(() => problems.id, { onDelete: "cascade" })
+    .notNull(),
+  tagId: t
+    .uuid()
+    .references(() => tags.id, { onDelete: "cascade" })
+    .notNull(),
+}));

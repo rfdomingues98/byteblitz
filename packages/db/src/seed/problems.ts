@@ -1,7 +1,7 @@
-import type { Db } from "../client";
+import type { Transaction } from "../client";
 import { problems } from "../schemas/problems";
 
-export const problemsSeedData: typeof problems.$inferInsert[] = [
+export const problemsSeedData: (typeof problems.$inferInsert)[] = [
   {
     title: "Two Sum",
     slug: "two-sum",
@@ -606,10 +606,10 @@ Explanation: merged array = [1,2,3,4] and median is (2 + 3) / 2 = 2.5.
 - \`-10^6 <= nums1[i], nums2[i] <= 10^6\``,
     difficulty: "hard",
     isPublished: true,
-  }
+  },
 ];
 
-export const insertProblemsSeed = async (db: Db) => {
+export const insertProblemsSeed = async (db: Transaction) => {
   console.log("🌱 Seeding problems...");
   await db.insert(problems).values(problemsSeedData).onConflictDoNothing();
-}; 
+};

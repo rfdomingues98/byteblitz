@@ -1,7 +1,7 @@
-import type { Db } from "../client";
+import type { Transaction } from "../client";
 import { languages } from "../schemas/languages";
 
-export const languagesSeedData: typeof languages.$inferInsert[] = [
+export const languagesSeedData: (typeof languages.$inferInsert)[] = [
   {
     name: "JavaScript",
     slug: "javascript",
@@ -68,7 +68,7 @@ export const languagesSeedData: typeof languages.$inferInsert[] = [
   },
 ];
 
-export const insertLanguagesSeed = async (db: Db) => {
+export const insertLanguagesSeed = async (db: Transaction) => {
   console.log("🌱 Seeding languages...");
   await db.insert(languages).values(languagesSeedData).onConflictDoNothing();
-}; 
+};

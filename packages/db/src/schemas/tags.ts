@@ -9,4 +9,4 @@ export const tags = pgTable("tag", (t) => ({
   updatedAt: t
     .timestamp({ mode: "date", withTimezone: true })
     .$onUpdateFn(() => sql`now()`),
-})); 
+}));

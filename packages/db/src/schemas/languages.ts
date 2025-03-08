@@ -18,4 +18,4 @@ export const languages = pgTable("language", (t) => ({
   updatedAt: t
     .timestamp({ mode: "date", withTimezone: true })
     .$onUpdateFn(() => sql`now()`),
-})); 
+}));
