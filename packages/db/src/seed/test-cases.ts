@@ -2,7 +2,9 @@ import type { Transaction } from "../client";
 import { testCases } from "../schemas/tests";
 
 // Define a type for our test case generator functions
-type TestCaseGenerator = (problemId: string) => (typeof testCases.$inferInsert)[];
+type TestCaseGenerator = (
+  problemId: string,
+) => (typeof testCases.$inferInsert)[];
 
 // We'll organize test cases in a map with problem slug as the key
 const testCasesMap: Record<string, TestCaseGenerator> = {
@@ -244,18 +246,7 @@ const testCasesMap: Record<string, TestCaseGenerator> = {
           "get",
           "get",
         ],
-        values: [
-          [2],
-          [1, 1],
-          [2, 2],
-          [1],
-          [3, 3],
-          [2],
-          [4, 4],
-          [1],
-          [3],
-          [4],
-        ],
+        values: [[2], [1, 1], [2, 2], [1], [3, 3], [2], [4, 4], [1], [3], [4]],
       }),
       expectedOutput: JSON.stringify([
         null,
@@ -422,8 +413,7 @@ const testCasesMap: Record<string, TestCaseGenerator> = {
         nums2: [3, 4],
       }),
       expectedOutput: JSON.stringify(2.5),
-      explanation:
-        "merged array = [1,2,3,4] and median is (2 + 3) / 2 = 2.5.",
+      explanation: "merged array = [1,2,3,4] and median is (2 + 3) / 2 = 2.5.",
       isPublic: true,
       isSample: true,
       orderIndex: 1,
@@ -460,7 +450,8 @@ const testCasesMap: Record<string, TestCaseGenerator> = {
         list2: [1, 3, 4],
       }),
       expectedOutput: JSON.stringify([1, 1, 2, 3, 4, 4]),
-      explanation: "The two lists [1,2,4] and [1,3,4] merge to form [1,1,2,3,4,4].",
+      explanation:
+        "The two lists [1,2,4] and [1,3,4] merge to form [1,1,2,3,4,4].",
       isPublic: true,
       isSample: true,
       orderIndex: 0,
@@ -508,7 +499,8 @@ const testCasesMap: Record<string, TestCaseGenerator> = {
         l2: [5, 6, 4],
       }),
       expectedOutput: JSON.stringify([7, 0, 8]),
-      explanation: "342 + 465 = 807. The result represents 807 in reverse order.",
+      explanation:
+        "342 + 465 = 807. The result represents 807 in reverse order.",
       isPublic: true,
       isSample: true,
       orderIndex: 0,
@@ -531,7 +523,8 @@ const testCasesMap: Record<string, TestCaseGenerator> = {
         l2: [9, 9, 9, 9],
       }),
       expectedOutput: JSON.stringify([8, 9, 9, 9, 0, 0, 0, 1]),
-      explanation: "9999999 + 9999 = 10009998. The result represents 10009998 in reverse order.",
+      explanation:
+        "9999999 + 9999 = 10009998. The result represents 10009998 in reverse order.",
       isPublic: true,
       isSample: true,
       orderIndex: 2,
@@ -578,7 +571,8 @@ const testCasesMap: Record<string, TestCaseGenerator> = {
         s: "pwwkew",
       }),
       expectedOutput: JSON.stringify(3),
-      explanation: "The answer is 'wke', with the length of 3. Notice that the answer must be a substring, 'pwke' is a subsequence and not a substring.",
+      explanation:
+        "The answer is 'wke', with the length of 3. Notice that the answer must be a substring, 'pwke' is a subsequence and not a substring.",
       isPublic: true,
       isSample: true,
       orderIndex: 2,
@@ -711,7 +705,8 @@ const testCasesMap: Record<string, TestCaseGenerator> = {
         height: [1, 8, 6, 2, 5, 4, 8, 3, 7],
       }),
       expectedOutput: JSON.stringify(49),
-      explanation: "The maximum area is formed by the vertical lines at indices 1 and 8 with heights 8 and 7, resulting in an area of min(8, 7) * (8 - 1) = 7 * 7 = 49.",
+      explanation:
+        "The maximum area is formed by the vertical lines at indices 1 and 8 with heights 8 and 7, resulting in an area of min(8, 7) * (8 - 1) = 7 * 7 = 49.",
       isPublic: true,
       isSample: true,
       orderIndex: 0,
@@ -732,7 +727,8 @@ const testCasesMap: Record<string, TestCaseGenerator> = {
         height: [4, 3, 2, 1, 4],
       }),
       expectedOutput: JSON.stringify(16),
-      explanation: "The maximum area is formed by the vertical lines at indices 0 and 4 with heights 4 and 4, resulting in an area of min(4, 4) * (4 - 0) = 4 * 4 = 16.",
+      explanation:
+        "The maximum area is formed by the vertical lines at indices 0 and 4 with heights 4 and 4, resulting in an area of min(4, 4) * (4 - 0) = 4 * 4 = 16.",
       isPublic: false,
       isSample: false,
       orderIndex: 2,
@@ -756,7 +752,8 @@ const testCasesMap: Record<string, TestCaseGenerator> = {
         height: [0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1],
       }),
       expectedOutput: JSON.stringify(6),
-      explanation: "The trapped rain water areas are: 1 unit between bars at indices 1 and 3, 1 unit between 3 and 6, 2 units between 6 and 8, and 2 units between 8 and 10. Total is 1 + 1 + 2 + 2 = 6.",
+      explanation:
+        "The trapped rain water areas are: 1 unit between bars at indices 1 and 3, 1 unit between 3 and 6, 2 units between 6 and 8, and 2 units between 8 and 10. Total is 1 + 1 + 2 + 2 = 6.",
       isPublic: true,
       isSample: true,
       orderIndex: 0,
@@ -777,7 +774,8 @@ const testCasesMap: Record<string, TestCaseGenerator> = {
         height: [4, 2, 3],
       }),
       expectedOutput: JSON.stringify(1),
-      explanation: "The trapped rain water area is: 1 unit between bars at indices 1 and 2.",
+      explanation:
+        "The trapped rain water area is: 1 unit between bars at indices 1 and 2.",
       isPublic: false,
       isSample: false,
       orderIndex: 2,
@@ -801,7 +799,8 @@ const testCasesMap: Record<string, TestCaseGenerator> = {
         root: [1, 2, 3],
       }),
       expectedOutput: JSON.stringify(6),
-      explanation: "The optimal path is 2 -> 1 -> 3 with a path sum of 2 + 1 + 3 = 6.",
+      explanation:
+        "The optimal path is 2 -> 1 -> 3 with a path sum of 2 + 1 + 3 = 6.",
       isPublic: true,
       isSample: true,
       orderIndex: 0,
@@ -812,7 +811,8 @@ const testCasesMap: Record<string, TestCaseGenerator> = {
         root: [-10, 9, 20, null, null, 15, 7],
       }),
       expectedOutput: JSON.stringify(42),
-      explanation: "The optimal path is 15 -> 20 -> 7 with a path sum of 15 + 20 + 7 = 42.",
+      explanation:
+        "The optimal path is 15 -> 20 -> 7 with a path sum of 15 + 20 + 7 = 42.",
       isPublic: true,
       isSample: true,
       orderIndex: 1,
@@ -833,7 +833,8 @@ const testCasesMap: Record<string, TestCaseGenerator> = {
         root: [5, 4, 8, 11, null, 13, 4, 7, 2, null, null, null, 1],
       }),
       expectedOutput: JSON.stringify(48),
-      explanation: "The optimal path is 11 -> 4 -> 5 -> 8 -> 13 + 7 with a path sum of 11 + 4 + 5 + 8 + 13 + 7 = 48.",
+      explanation:
+        "The optimal path is 11 -> 4 -> 5 -> 8 -> 13 + 7 with a path sum of 11 + 4 + 5 + 8 + 13 + 7 = 48.",
       isPublic: false,
       isSample: false,
       orderIndex: 3,
