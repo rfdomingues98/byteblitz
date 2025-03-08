@@ -27,15 +27,10 @@ import { NavSecondary } from "./nav-secondary";
 import { NavUser } from "./nav-user";
 
 const data = {
-  user: {
-    name: "shadcn",
-    email: "m@example.com",
-    avatar: "/avatars/shadcn.jpg",
-  },
   navMain: [
     {
       title: "Dashboard",
-      url: "#",
+      url: "/dashboard",
       icon: LayoutDashboardIcon,
       isActive: true,
     },
@@ -113,7 +108,6 @@ const data = {
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   const clerkUser = useUser();
-  console.log({ clerkUser });
   const user = {
     name: clerkUser.user?.fullName ?? "",
     email: clerkUser.user?.emailAddresses[0]?.emailAddress ?? "",
