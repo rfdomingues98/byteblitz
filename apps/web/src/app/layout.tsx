@@ -13,7 +13,6 @@ import "~/app/globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
 
 import { env } from "~/env";
-import { Nav } from "./_components/nav";
 
 export const metadata: Metadata = {
   metadataBase: new URL(
@@ -55,10 +54,7 @@ export default function RootLayout(props: { children: React.ReactNode }) {
       >
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <ClerkProvider>
-            <TRPCReactProvider>
-              <Nav />
-              {props.children}
-            </TRPCReactProvider>
+            <TRPCReactProvider>{props.children}</TRPCReactProvider>
             <div className="absolute bottom-4 right-4">
               <ThemeToggle />
             </div>
